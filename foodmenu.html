@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>원주세브란스기독병원 식당 메뉴</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 1rem;
+      font-family: sans-serif;
+      background: #f4f4f4;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    .container {
+      display: flex;
+      width: 100%;
+      max-width: 1200px;
+      gap: 1rem;
+    }
+    /* 그리드 레이아웃 */
+    .menu-grid {
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    .menu-item {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      cursor: pointer;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .menu-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    }
+    .menu-item.selected {
+      outline: 3px solid #1e90ff;
+    }
+    .menu-item img {
+      width: 100%;
+      display: block;
+    }
+    .menu-info {
+      padding: 0.75rem;
+      text-align: center;
+    }
+    .menu-info .name {
+      font-size: 1.1rem;
+      margin: 0.5rem 0 0.25rem;
+      font-weight: bold;
+    }
+    .menu-info .price {
+      font-size: 1rem;
+      color: #1e90ff;
+    }
+
+    /* 주문 박스 (사이드 드로어) */
+    #orderBox {
+      width: 300px;
+      max-height: calc(100vh - 2rem);
+      overflow-y: auto;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+      padding: 1rem;
+      display: none;
+      position: relative;
+    }
+    #orderBox h2 {
+      margin: 0 0 1rem;
+      font-size: 1.8rem;
+      text-align: center;
+    }
+    #orderList .order-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 0.5rem;
+    }
+    #orderList .order-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    #orderList .order-item img {
+      width: 60px;
+      border-radius: 6px;
+    }
+    #orderList .details {
+      flex: 1;
+    }
+    #orderList .details p {
+      margin: 0.2rem 0;
+      font-size: 1rem;
+    }
+    .count-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 0.3rem 0;
+    }
+    .count-btn {
+      width: 28px;
+      height: 28px;
+      border: none;
+      border-radius: 6px;
+      background: #e0e0e0;
+      font-size: 1.1rem;
+      cursor: pointer;
+    }
+    .delete-btn {
+      margin-left: auto;
+      background: #ff4d4f;
+      border: none;
+      color: #fff;
+      padding: 0.25rem 0.5rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+    .delete-btn:active {
+      background: #d9363e;
+    }
+    #grandTotalRow {
+      text-align: right;
+      font-size: 1.2rem;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+    #payBtn {
+      display: block;
+      width: 100%;
+      padding: 0.75rem;
+      font-size: 1.1rem;
+      background: #1e90ff;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+    #payBtn:active {
+      background: #186fcb;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>원주세브란스기독병원 식당 메뉴</h1>
+
+  <div class="container">
+    <!-- 메뉴 그리드 -->
+    <div class="menu-grid">
+      <div class="menu-item" data-name="김밥" data-price="4000">
+        <img src="김밥.png" alt="김밥">
+        <div class="menu-info">
+          <div class="name">김밥</div>
+          <div class="price">4,000원</div>
+        </div>
+      </div>
+      <div class="menu-item" data-name="라면" data-price="8000">
+        <img src="라면.png" alt="라면">
+        <div class="menu-info">
+          <div class="name">라면</div>
+          <div class="price">8,000원</div>
+        </div>
+      </div>
+      <div class="menu-item" data-name="돈까스" data-price="10000">
+        <img src="돈까스.png" alt="돈까스">
+        <div class="menu-info">
+          <div class="name">돈까스</div>
+          <div class="price">10,000원</div>
+        </div>
+      </div>
+      <div class="menu-item" data-name="제육덮밥" data-price="10000">
+        <img src="제육덮밥.png" alt="제육덮밥">
+        <div class="menu-info">
+          <div class="name">제육덮밥</div>
+          <div class="price">10,000원</div>
+        </div>
+      </div>
+      <div class="menu-item" data-name="쫄면" data-price="8000">
+        <img src="쫄면.png" alt="쫄면">
+        <div class="menu-info">
+          <div class="name">쫄면</div>
+          <div class="price">8,000원</div>
+        </div>
+      </div>
+      <div class="menu-item" data-name="스팸김치볶음밥" data-price="10000">
+        <img src="스팸김치볶음밥.png" alt="스팸김치볶음밥">
+        <div class="menu-info">
+          <div class="name">스팸김치볶음밥</div>
+          <div class="price">10,000원</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 주문창 -->
+    <div id="orderBox">
+      <h2>선택하신 메뉴</h2>
+      <div id="orderList"></div>
+      <div id="grandTotalRow">
+        전체 금액: <span id="grandTotal">0</span>원
+      </div>
+      <button id="payBtn">결제하기</button>
+    </div>
+  </div>
+
+  <script>
+    const cart = {};
+    const orderBox = document.getElementById('orderBox');
+
+    document.querySelectorAll('.menu-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const name   = item.dataset.name;
+        const price  = parseInt(item.dataset.price, 10);
+        const imgSrc = item.querySelector('img').src;
+        if (!cart[name]) cart[name] = { price, count: 1, imgSrc };
+        updateSelectionHighlight();
+        renderCart();
+        orderBox.style.display = 'block';
+      });
+    });
+
+    function updateSelectionHighlight() {
+      document.querySelectorAll('.menu-item').forEach(item => {
+        item.classList.toggle('selected', !!cart[item.dataset.name]);
+      });
+    }
+
+    function renderCart() {
+      const listEl = document.getElementById('orderList');
+      listEl.innerHTML = '';
+      let grand = 0;
+      for (const name in cart) {
+        const { price, count, imgSrc } = cart[name];
+        const total = price * count;
+        grand += total;
+        const key = name.replace(/\s+/g,'-');
+        const div = document.createElement('div');
+        div.className = 'order-item';
+        div.innerHTML = `
+          <img src="${imgSrc}" alt="${name}">
+          <div class="details">
+            <p>${name}</p>
+            <p>단가: ${price.toLocaleString()}원</p>
+            <div class="count-row">
+              수량:
+              <button class="count-btn" onclick="updateCount('${name}',-1)">−</button>
+              <span id="qty-${key}">${count}</span>
+              <button class="count-btn" onclick="updateCount('${name}',1)">＋</button>
+              <button class="delete-btn" onclick="removeItem('${name}')">삭제</button>
+            </div>
+            <p>금액: <span id="lt-${key}">${total.toLocaleString()}</span>원</p>
+          </div>`;
+        listEl.appendChild(div);
+      }
+      document.getElementById('grandTotal').innerText = grand.toLocaleString();
+    }
+
+    function updateCount(name, delta) {
+      cart[name].count = Math.max(1, cart[name].count + delta);
+      renderCart();
+    }
+
+    function removeItem(name) {
+      delete cart[name];
+      renderCart();
+      updateSelectionHighlight();
+      if (!Object.keys(cart).length) {
+        orderBox.style.display = 'none';
+      }
+    }
+
+    document.getElementById('payBtn').addEventListener('click', () => {
+      const total = document.getElementById('grandTotal').innerText;
+      alert(`총 결제 금액: ${total}원\n결제 진행합니다.`);
+    });
+  </script>
+</body>
+</html>
