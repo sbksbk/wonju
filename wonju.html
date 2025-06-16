@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>분당서울대학교병원 앱 설치</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Segoe UI', sans-serif;
+            overflow: hidden;
+        }
+        .popup-card {
+            background: white;
+            border-radius: 28px;
+            padding: 40px 50px;
+            max-width: 1100px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transform: scale(0.7);
+            opacity: 0;
+            animation: popupIn 0.4s ease-out forwards;
+        }
+        @keyframes popupIn {
+            0% {
+                transform: scale(0.7);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        .popup-title {
+            font-size: 42px;
+            font-weight: bold;
+            color: #003366;
+            margin-bottom: 40px;
+        }
+        .qr-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: nowrap;
+            gap: 120px;
+            margin-bottom: 30px;
+        }
+        .qr-block {
+            text-align: center;
+        }
+        .qr-block img {
+            width: 380px;
+            height: 380px;
+            border: 2px solid #ccc;
+            border-radius: 20px;
+        }
+        .button {
+            margin-top: 20px;
+            background-color: #0072ce;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 16px 32px;
+            font-size: 20px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .small-text {
+            font-size: 18px;
+            color: #666666;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="popup-card">
+        <div class="popup-title">분당서울대학교병원 앱 설치</div>
+        <div class="qr-section">
+            <div class="qr-block">
+                <img src="snuh_android.jpg" alt="Google Play QR">
+                <div><a class="button" href="https://play.google.com/store/search?q=%EB%B6%84%EB%8B%B9%EC%84%9C%EC%9A%B8%EB%8C%80&c=apps&hl=ko&gl=KR&utm_source=apac_med" target="_blank">Google Play</a></div>
+            </div>
+            <div class="qr-block">
+                <img src="snuh_apple.jpg" alt="App Store QR">
+                <div><a class="button" href="https://apps.apple.com/kr/app/%EB%B6%84%EB%8B%B9%EC%84%9C%EC%9A%B8%EB%8C%80%EB%B3%91%EC%9B%90-%ED%99%88%ED%8E%98%EC%9D%B4%EC%A7%80-%EB%B0%94%EB%A1%9C%EA%B0%80%EA%B8%B0/id486679868" target="_blank">App Store</a></div>
+            </div>
+        </div>
+        <div class="small-text">QR코드를 스캔한 후, 화면 하단의 홈 버튼(●)을 눌러주세요</div>
+    </div>
+</body>
+</html>
